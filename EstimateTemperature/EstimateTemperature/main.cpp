@@ -31,15 +31,18 @@ int main() {
 
 	/*予測用の説明変数から，予想平均気温を求め，stdoutに出力*/
 	double result = predict(predictfilename, weight,ave);
-	fprintf_s(stdout, "\n【明日の予測平均気温】%lf(℃)\n", result);
+	fprintf_s(stdout, "\n【予測平均気温】%lf(℃)\n", result);
 
 
 	/*出力ファイル名の読み込み*/
-	char outfilename[CHARBUFF];
-	get_ini(outfilename,"setting.ini","output","filename");
+	char outfilename1[CHARBUFF];
+	get_ini(outfilename1,"setting.ini","output","filename1");
+	char outfilename2[CHARBUFF];
+	get_ini(outfilename2, "setting.ini", "output", "filename2");
 
 	/*重回帰式の重みと予想気温をcsvに出力*/
-	write_data(outfilename, weight, result);
+	write_weight(outfilename1, weight);
+	write_result(outfilename2, result);
 	
 	return 0;
 }

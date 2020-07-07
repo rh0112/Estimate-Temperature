@@ -26,4 +26,5 @@ int make_datalist(const char* infileName, Weatherdata* data);
 void MRA(Weatherdata* data, int datanum, double returnweight[VARIABLENUM],double returnave[VARIABLENUM]);
 double predict(const char* infileName, double weight[VARIABLENUM],double ave[VARIABLENUM]);
 void make_predictiondata(const char* infileName, double returndata[VARIABLENUM], double ave[VARIABLENUM]);
-void write_data(const char* fileName, double weight[VARIABLENUM], double result);
+void write_weight(const char* fileName, double weight[VARIABLENUM]);
+void write_result(const char* fileName, double result);

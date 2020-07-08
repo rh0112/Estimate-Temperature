@@ -2,19 +2,20 @@
 
 #include "header.h"
 
+//datanum個のデータから重回帰式を求め，それぞれの変数の重みと，それぞれの変数の平均を返す
 void MRA(Weatherdata* data, int datanum, double returnweight[VARIABLENUM], double returnave[VARIABLENUM]) {
 
 	/*説明変数行列の中心化*/
 	//各説明平均の平均を求める
 	for (int i = 0; i < datanum; i++) {
 		for (int l = 1; l < VARIABLENUM; l++) {
-			returnave[l] += (data[i].explanatory_variable[l]/datanum);
+			returnave[l] += (data[i].explanatory_variable[l] / datanum);
 		}
 	}
 	//それぞれの値から平均を引く(ダミー変数を除く)
 	for (int i = 0; i < datanum; i++) {
 		for (int l = 1; l < VARIABLENUM; l++) {
-			data[i].explanatory_variable[l]= data[i].explanatory_variable[l]- returnave[l];
+			data[i].explanatory_variable[l] = data[i].explanatory_variable[l] - returnave[l];
 		}
 	}
 
@@ -75,7 +76,7 @@ void MRA(Weatherdata* data, int datanum, double returnweight[VARIABLENUM], doubl
 		for (int l = 0; l < datanum; l++) {
 			invXTX_XT[i][l] = 0.0;
 			for (int k = 0; k < VARIABLENUM; k++) {
-				invXTX_XT[i][l] += inv_XTX[i][k]* XT[k][l];
+				invXTX_XT[i][l] += inv_XTX[i][k] * XT[k][l];
 			}
 		}
 	}

@@ -2,6 +2,7 @@
 
 #include "header.h"
 
+//重みをcsvに出力する
 void write_weight(const char* fileName, double weight[VARIABLENUM]) {
 	FILE* fp;
 	errno_t error;
@@ -20,6 +21,7 @@ void write_weight(const char* fileName, double weight[VARIABLENUM]) {
 	}
 }
 
+//予測平均気温をtxtに出力する
 void write_result(const char* fileName, double result) {
 	FILE* fp;
 	errno_t error;

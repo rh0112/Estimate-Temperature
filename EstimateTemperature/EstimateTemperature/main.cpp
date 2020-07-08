@@ -14,7 +14,7 @@ int main() {
 	//各説明変数(初期)の平均も求めておく
 	double ave[VARIABLENUM];
 	double weight[VARIABLENUM];
-	MRA(sampledata, sampledatanum, weight,ave);
+	MRA(sampledata, sampledatanum, weight, ave);
 
 	/*重みをstdoutに出力*/
 	for (int i = 0; i < VARIABLENUM; i++) {
@@ -30,19 +30,19 @@ int main() {
 	get_ini(predictfilename, "setting.ini", "input", "predictionfilename");
 
 	/*予測用の説明変数から，予想平均気温を求め，stdoutに出力*/
-	double result = predict(predictfilename, weight,ave);
+	double result = predict(predictfilename, weight, ave);
 	fprintf_s(stdout, "\n【予測平均気温】%lf(℃)\n", result);
 
 
 	/*出力ファイル名の読み込み*/
 	char outfilename1[CHARBUFF];
-	get_ini(outfilename1,"setting.ini","output","filename1");
+	get_ini(outfilename1, "setting.ini", "output", "filename1");
 	char outfilename2[CHARBUFF];
 	get_ini(outfilename2, "setting.ini", "output", "filename2");
 
 	/*重回帰式の重みと予想気温をcsvに出力*/
 	write_weight(outfilename1, weight);
 	write_result(outfilename2, result);
-	
+
 	return 0;
 }

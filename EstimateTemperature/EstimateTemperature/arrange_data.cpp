@@ -2,8 +2,8 @@
 
 #include "header.h"
 
-/*サンプルファイルから構造体を作成し，その要素数を返す*/
-int make_datalist(const char* infileName, Weatherdata *data) {
+//サンプルファイルから構造体を作成し，その要素数を返す
+int make_datalist(const char* infileName, Weatherdata* data) {
 	FILE* fi;
 	char s[CHARBUFF];
 
@@ -31,16 +31,16 @@ int make_datalist(const char* infileName, Weatherdata *data) {
 		}
 		while (fgets(s, CHARBUFF, fi) != NULL) {
 			strtok_s(s, delim, &ctx);//1つ目の部分文字列を飛ばす(年月日)
-			data[cnt-1].temperature = atof(strtok_s(NULL, delim, &ctx));
+			data[cnt - 1].temperature = atof(strtok_s(NULL, delim, &ctx));
 			//次の日に説明変数を格納
 			data[cnt].explanatory_variable[0] = 1;
 			for (int i = 1; i < 37; i++) {//次の日の説明変数の内，9日分は前日の説明変数とかぶっているので格納
-				data[cnt].explanatory_variable[i] = data[cnt-1].explanatory_variable[i + 4];
+				data[cnt].explanatory_variable[i] = data[cnt - 1].explanatory_variable[i + 4];
 			}
-			data[cnt].explanatory_variable[VARIABLENUM-4] = data[cnt - 1].temperature;
-			data[cnt].explanatory_variable[VARIABLENUM-3] = atof(strtok_s(NULL, delim, &ctx));
-			data[cnt].explanatory_variable[VARIABLENUM-2] = atof(strtok_s(NULL, delim, &ctx));
-			data[cnt].explanatory_variable[VARIABLENUM-1] = atof(strtok_s(NULL, delim, &ctx));
+			data[cnt].explanatory_variable[VARIABLENUM - 4] = data[cnt - 1].temperature;        //平均気温
+			data[cnt].explanatory_variable[VARIABLENUM - 3] = atof(strtok_s(NULL, delim, &ctx));//日照時間
+			data[cnt].explanatory_variable[VARIABLENUM - 2] = atof(strtok_s(NULL, delim, &ctx));//降水量
+			data[cnt].explanatory_variable[VARIABLENUM - 1] = atof(strtok_s(NULL, delim, &ctx));//平均風速
 			cnt++;
 		}
 		fclose(fi);
